@@ -397,20 +397,86 @@ em { font-style: italic; }
 .nav__toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 @media (max-width: 880px) {
+  /* Remove backdrop-filter on mobile so the fixed mobile-nav panel
+     is not trapped inside the header's containing block. */
+  .header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-bg);
+  }
+  [data-theme='dark'] .header { background: var(--color-bg); }
+
+  /* Backdrop scrim behind the slide-in panel */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+    z-index: 90;
+  }
+  .nav-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
   .nav {
     position: fixed;
-    inset: 84px 0 0 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: min(86vw, 360px);
+    height: 100vh;
+    height: 100dvh;
     background: var(--color-bg);
+    border-left: 1px solid var(--color-divider);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.18);
     flex-direction: column;
-    align-items: flex-start;
-    padding: var(--space-8) var(--gutter);
-    gap: var(--space-6);
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: calc(var(--space-8) + 28px) var(--space-6) var(--space-6);
+    gap: var(--space-2);
     transform: translateX(100%);
     transition: transform 0.4s var(--ease);
+    z-index: 100;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav.is-open { transform: translateX(0); }
-  .nav a { font-size: var(--text-lg); font-family: var(--font-display); color: var(--color-text); }
-  .nav__toggle { display: flex; }
+  .nav a {
+    font-size: var(--text-xl);
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-text);
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--color-divider);
+    width: 100%;
+  }
+  .nav a:last-of-type { border-bottom: none; }
+  .nav a:not(.nav__cta)::after { display: none; }
+  .nav__cta {
+    margin-top: var(--space-4);
+    text-align: center;
+    padding: 0.95rem 1.4rem !important;
+    font-size: var(--text-base);
+    border-bottom: none !important;
+  }
+
+  /* Close (X) button needs to sit above the panel content,
+     and we re-style it for the open state. */
+  .nav__toggle {
+    display: flex;
+    position: relative;
+    z-index: 110;
+  }
+  .nav__toggle[aria-expanded='true'] {
+    position: fixed;
+    top: 18px;
+    right: 16px;
+  }
+  .nav__toggle[aria-expanded='true'] span { background: var(--color-text); }
 }
 
 /* ============================================================

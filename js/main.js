@@ -31,19 +31,35 @@
   // ---------- Mobile nav ----------
   const navToggle = document.querySelector('.nav__toggle');
   const nav = document.querySelector('.nav');
+  const navBackdrop = document.querySelector('.nav-backdrop');
+
+  function setNav(open) {
+    if (!nav || !navToggle) return;
+    nav.classList.toggle('is-open', open);
+    if (navBackdrop) navBackdrop.classList.toggle('is-open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
   if (navToggle && nav) {
     navToggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
+      setNav(!nav.classList.contains('is-open'));
     });
     nav.querySelectorAll('a').forEach((a) =>
-      a.addEventListener('click', () => {
-        nav.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      })
+      a.addEventListener('click', () => setNav(false))
     );
+    if (navBackdrop) {
+      navBackdrop.addEventListener('click', () => setNav(false));
+    }
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) setNav(false);
+    });
+    // If viewport grows past mobile breakpoint, ensure menu is closed.
+    window.matchMedia('(min-width: 881px)').addEventListener('change', (e) => {
+      if (e.matches) setNav(false);
+    });
   }
 
   // ---------- Sticky header shadow ----------
