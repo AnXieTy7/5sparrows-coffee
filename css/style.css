@@ -403,6 +403,9 @@ em { font-style: italic; }
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     background: var(--color-bg);
+    /* Lift header above the nav-backdrop so the panel inside it
+       (z-index 100) renders above the scrim (z-index 90). */
+    z-index: 200;
   }
   [data-theme='dark'] .header { background: var(--color-bg); }
 
