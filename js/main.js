@@ -12,13 +12,9 @@
     root.setAttribute('data-theme', theme);
   }
 
-  // Default: respect system
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  applyTheme(prefersDark.matches ? 'dark' : 'light');
-
-  prefersDark.addEventListener('change', (e) => {
-    if (!userTheme) applyTheme(e.matches ? 'dark' : 'light');
-  });
+  // Always use the brand light/cream palette by default.
+  // Dark mode is opt-in via the toggle, not system-driven.
+  applyTheme('light');
 
   if (toggle) {
     toggle.addEventListener('click', () => {
