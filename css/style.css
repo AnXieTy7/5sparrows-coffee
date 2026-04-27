@@ -15,15 +15,15 @@
   --color-border: #b8a877;
 
   /* Text — deep olive forest */
-  --color-text: #2f3a1c;            /* dark forest */
-  --color-text-muted: #5b6a3e;
-  --color-text-faint: #8a9568;
+  --color-text: #2a3418;            /* dark forest */
+  --color-text-muted: #4a5827;      /* deeper olive for body copy on cream */
+  --color-text-faint: #6a7838;      /* readable olive for tags/eyebrows */
   --color-text-inverse: #f9f2dc;
 
   /* Accents */
-  --color-primary: #5c7a2e;         /* olive green — wordmark */
+  --color-primary: #4f6a26;         /* olive green — wordmark */
   --color-primary-hover: #3f5520;
-  --color-amber: #c8a04e;           /* soft gold/honey */
+  --color-amber: #b08828;           /* deeper honey gold for contrast on cream */
   --color-amber-soft: #e6cf8a;
   --color-sage: #8a9c5e;            /* lighter olive */
 
@@ -561,12 +561,12 @@ em { font-style: italic; }
   margin-bottom: var(--space-12);
 }
 .hero__actions .btn--primary {
-  background: var(--color-amber);
-  color: var(--color-text);
+  background: var(--color-amber-soft);
+  color: #2a3418;
 }
 .hero__actions .btn--primary:hover {
-  background: var(--color-amber-soft);
-  color: var(--color-text);
+  background: #f9f2dc;
+  color: #2a3418;
 }
 .hero__actions .btn--ghost {
   color: #f9f2dc;
@@ -775,8 +775,8 @@ section {
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-offset);
-  color: var(--color-primary);
+  background: var(--color-text);
+  color: var(--color-amber-soft);
   margin-bottom: var(--space-2);
 }
 [data-theme='dark'] .service__icon { color: var(--color-amber); }
@@ -788,19 +788,20 @@ section {
 }
 .service p {
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
+  color: var(--color-text);
+  opacity: 0.82;
   line-height: 1.6;
   flex: 1;
   margin: 0;
 }
 .service__tag {
   font-size: var(--text-xs);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-text-faint);
+  color: var(--color-primary);
   padding-top: var(--space-3);
-  border-top: 1px solid var(--color-divider);
+  border-top: 1px solid var(--color-border);
 }
 .service--feature {
   background: var(--color-text);
@@ -857,10 +858,10 @@ section {
 }
 .process__num {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-style: italic;
-  color: var(--color-amber);
-  font-weight: 400;
+  color: var(--color-primary);
+  font-weight: 600;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-3);
   display: block;
